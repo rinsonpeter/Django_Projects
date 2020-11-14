@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mathsapp</title>
+</head>
+<body>
+    <form method="post" action="{%url 'add' %}" >
+        {% csrf_token %}
+        enterNo1:<input type="text" name="no1"><br>
+        enterNo2:<input type="text" name="no2"><br>
+                 <input type="submit" value="+">
+    </form>
+        <h3>Addition:{{add}}</h3><hr>
+    <form method="post" action="{%url 'sub' %}" >
+        {% csrf_token %}
+        enterNo1:<input type="text" name="no1"><br>
+        enterNo2:<input type="text" name="no2"><br>
+                 <input type="submit" value="-">
+    </form>
+        <h3>Subtraction:{{Minus}}</h3><hr>
+    <form method="post" action="{%url 'mul' %}" >
+        {% csrf_token %}
+        enterNo1:<input type="text" name="no1"><br>
+        enterNo2:<input type="text" name="no2"><br>
+                 <input type="submit" value="x">
+    </form>
+        <h3>Multiply:{{multiply}}</h3><hr>
+    <form method="post" action="{%url 'div' %}" >
+        {% csrf_token %}
+        enterNo1:<input type="text" name="no1"><br>
+        enterNo2:<input type="text" name="no2"><br>
+                 <input type="submit" value="/">
+    </form>
+        <h3>Division:{{Division}}</h3>
+</body>
+</html>

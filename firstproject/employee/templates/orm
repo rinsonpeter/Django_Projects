@@ -1,0 +1,16 @@
+
+
+class Employee(models.Model):
+    first = models.CharField(max_length=120)
+    email = models.CharField(max_length=120, unique=True)
+    uname = models.CharField(max_length=120, unique=True)
+    pwd = models.CharField(max_length=120)
+    sal = models.IntegerField(default=5000)
+
+    def __str__(self):
+        return self.first
+
+
+obj=Employee(first="ajay,email="ajay@gmail.com",
+uname="ajay",pwd="ajay123",sal="25000")
+obj.save()

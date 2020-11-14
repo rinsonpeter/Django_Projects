@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Recipe</title>
+</head>
+<body>
+    <h3>Update Recipe</h3>
+    <div class="container">
+        <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <input type="submit" value="update">
+                    </form>
+                </div>
+                <div class="col-4"></div>
+
+            </div>
+    </div>
+
+</body>
+</html>

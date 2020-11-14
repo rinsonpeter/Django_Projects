@@ -1,0 +1,34 @@
+<html>
+
+<head>
+    <title>Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <h1>NEW STUDENT REGISTRATION</h1>
+    <div class="container">
+        <div class="jumbotron">
+            <form method="post" action="{%url 'getregdetails'%}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username" >username</label>
+                    <input type="text" name="uname" id="" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="Password" >Password</label>
+                    <input type="password" name="pasw" id="paaasw" class="form-control">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <a href="bootstrap_2.html">new user? Register now</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
