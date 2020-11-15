@@ -36,5 +36,5 @@ class MobileCreationForm(ModelForm):
             'screensize': forms.TextInput(attrs = {'class': 'form-control'}),
             'processor': forms.TextInput(attrs = {'class': 'form-control'}),
             'price': forms.TextInput(attrs = {'class': 'form-control'}),
-         #   'image': forms.TextInput(attrs = {'class': 'form-control'}),
+            'image': forms.ClearableFileInput(attrs = {'class': 'form-control'})
         }

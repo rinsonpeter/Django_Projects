@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cart</title>
+</head>
+<body style="background-color: rgb(146, 87, 158);">
+<h1> Your Orders</h1>
+
+    {% for order in orders%}
+       Item: {{order.mobile}} <br>
+       Quantity: {{order.quantity}} <br>
+       Status: {{order.status}} <br>
+        <br>
+    {% endfor %}
+
+
+</body>
+</html>
