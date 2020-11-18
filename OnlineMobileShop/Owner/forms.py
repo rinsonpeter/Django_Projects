@@ -1,7 +1,7 @@
 from django import forms
 from Owner.models import Brand, Mobile
 from django.forms import ModelForm
-
+from Users.models import Order
 
 class BrandcreateForm(ModelForm):
     class Meta:
@@ -38,3 +38,15 @@ class MobileCreationForm(ModelForm):
             'price': forms.TextInput(attrs = {'class': 'form-control'}),
             'image': forms.ClearableFileInput(attrs = {'class': 'form-control'})
         }
+class OrderForm(ModelForm):
+    class Meta:
+        model=Order
+        fields="__all__"
+        widgets = {
+            'mobile': forms.TextInput(attrs = {'class': 'form-control','readonly':'readonly'}),
+            'user': forms.TextInput(attrs = {'class': 'form-control','readonly':'readonly'}),
+            'quantity': forms.TextInput(attrs = {'class': 'form-control','readonly':'readonly'}),
+            'address': forms.Textarea(attrs = {'class': 'form-control','readonly':'readonly'}),
+            'status': forms.Select(attrs = {'class': 'form-control'}),
+            'price': forms.TextInput(attrs = {'class': 'form-control','readonly':'readonly'}),
+            }

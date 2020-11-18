@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends 'users/base.html' %}
+{% block body_block %}
+
+<br>
+<div class="card" style="width: 18rem ">
+
+      <div class="card-body">
+
+            <h3 class="card-title">Item:{{ order.mobile }}</h3>
+            <p class="card-text">Username:{{ order.user }}</p>
+            <p class="card-text">Quantity:{{ order.quantity }}</p>
+            <p class="card-text">Status:{{ order.status }}</p>
+
+      </div>
+
+</div><br>
+
+{% endblock %}

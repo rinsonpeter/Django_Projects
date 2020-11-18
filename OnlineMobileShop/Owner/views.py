@@ -1,18 +1,34 @@
 from django.shortcuts import render, redirect
-from Owner.forms import BrandcreateForm, MobileCreationForm
+from Owner.forms import BrandcreateForm, MobileCreationForm, OrderForm
 from Owner.models import Brand, Mobile
-
-
-# def listBrands(request):
-#     brands = Brand.objects.all()
-#     form = BrandcreateForm()
-#     context = {}
-#     context['brands'] = brands
-#     context['form'] = form
-#     return render(request, 'brandcreation.html', context)
+from Users.models import Order
 
 
 # Create your views here.
+def index(request):
+    return render(request,'owner/index.html')
+
+def orderDetails(request, pk):
+    orders = Order.objects.get(id = pk)
+    form = OrderForm(instance = orders)
+    context = {}
+    context['form'] = form
+    context['orders'] = orders
+    if request.method == 'POST':
+        form = OrderForm(data = request.POST, instance = orders)
+        if form.is_valid():
+            form.save()
+            return redirect('viewOrders')
+
+    return render(request, 'owner/orderdetails.html', context)
+
+
+def viewOrders(request):
+    orders = Order.objects.all()
+    context = {}
+    context['orders'] = orders
+    return render(request, 'owner/vieworders.html', context)
+
 
 def createBrand(request):
     form = BrandcreateForm()
@@ -77,15 +93,18 @@ def listMobile(request):
 
     return render(request, 'owner/listmobile.html', context)
 
+
 def viewMobiles(request, pk):
     qs = Mobile.objects.get(id = pk)
     context = {'mobile': qs}
 
-    return render(request,'owner/viewmobile.html',context)
+    return render(request, 'owner/viewmobile.html', context)
+
 
 def deleteMob(request, pk):
     Mobile.objects.get(id = pk).delete()
     return redirect('listmobile')
+
 
 def updateMob(request, pk):
     mob = Mobile.objects.get(id = pk)
@@ -94,7 +113,7 @@ def updateMob(request, pk):
     context['form'] = form
 
     if request.method == 'POST':
-        form = MobileCreationForm(instance = mob, data = request.POST,files=request.FILES)
+        form = MobileCreationForm(instance = mob, data = request.POST, files = request.FILES)
         if form.is_valid():
             form.save()
             print("inside update save")
@@ -104,4 +123,3 @@ def updateMob(request, pk):
             return render(request, 'owner/updatemob.html', context)
 
     return render(request, 'owner/updatemob.html', context)
-

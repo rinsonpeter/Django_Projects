@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Orders</title>
-</head>
-<body style="background-color: rgb(146, 87, 158);">
-    <form method="post">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="order">
-    </form>
 
+{% extends 'users/base.html' %}
+{% block body_block %}
 
-</body>
-</html>
+    <div class="container"><br>
+        <div class="row">
+        <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="order">
+        </form>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,19 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>cart</title>
-</head>
-<body style="background-color: rgb(146, 87, 158);">
-<h1> Your Orders</h1>
+
+{% extends 'users/base.html' %}
+{% block body_block %}
+
+<div class="container">
+
+    <h1> Your Orders</h1><br>
+    {% if orders %}
 
     {% for order in orders%}
-       Item: {{order.mobile}} <br>
-       Quantity: {{order.quantity}} <br>
-       Status: {{order.status}} <br>
-        <br>
-    {% endfor %}
+        <div class="card" style="width: 18rem ">
 
+          <div class="card-body">
 
-</body>
-</html>
+                <h3 class="card-title">{{order.mobile}}</h3>
+                <p class="card-text">Quantity:{{order.quantity}}</p>
+                <p class="card-text">Status  :{{order.status}}</p>
+                <a href="{%url 'deleteOrder' order.id%}" class="btn btn-danger">Cancel Order</a>
+                <a href="{%url 'viewCartItem' order.id %}" class="btn btn-primary">Item Details</a>
+          </div>
+
+        </div><br>
+            {% endfor %}
+            {% else %}
+            <h3>Your cart is empty</h3>
+            {% endif %}
+</div>
+
+{% endblock %}
