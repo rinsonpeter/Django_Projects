@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+{% block body_block %}
+
+<div class='container'>
+            <h3>Create Jobs here</h3>
+  <div class='row'>
+    <div class='col-4'>
+
+        <form method='post'>
+          {% csrf_token %}
+          {{form.as_p}}
+          <input type="submit" value="create">
+        </form>
+
+    </div>      
+  </div>
+
+</div>
+
+
+{% endblock %}

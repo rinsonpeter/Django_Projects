@@ -1,0 +1,17 @@
+{%extends 'trainerBase.html'%}
+{% block body_block %}
+
+    <div class='container'>
+
+        <form action="" method='post'>
+
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Apply">
+
+        </form>
+
+    </div>
+
+
+{% endblock %}

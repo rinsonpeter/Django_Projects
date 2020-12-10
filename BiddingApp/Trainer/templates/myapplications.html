@@ -1,0 +1,35 @@
+{%extends 'trainerBase.html'%}
+{% block body_block %}
+
+<div class='container'>
+
+<h1>Your Applications</h1><hr>
+    {% if apps %}
+        <div class='row'>
+            {% for application in apps%}
+                <div class='col-4'>
+                
+                    <div class="card" style="width: 18rem ">
+                    <div class="card-body">
+                    <h3 class="card-title">Name: {{application.user}}</h3>
+                    <p class="card-text">Skill :{{application.skill}}</p>
+                    <p class="card-text">Title  :{{application.title}}</p>
+                    <p class="card-text">Status  :{{application.status}}</p>
+                    <a href="" class="btn btn-danger">Cancel</a>
+                    <a href="" class="btn btn-primary">Details</a>
+                    </div>
+                    </div><br>
+                </div>
+            {% endfor %}
+
+        </div>
+        
+    {% else %}<br><br>
+            <h4>No Applications currently</h4>
+    {% endif %}
+
+
+</div>
+
+
+{% endblock %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from Owner.forms import BrandcreateForm, MobileCreationForm, OrderForm
-from Owner.models import Brand, Mobile
+from Owner.models import Brand,Mobile
 from Users.models import Order
 
 
@@ -23,7 +23,7 @@ def orderDetails(request, pk):
     return render(request, 'owner/orderdetails.html', context)
 
 
-def viewOrders(request):
+def viewOrders(request):    
     orders = Order.objects.all()
     context = {}
     context['orders'] = orders

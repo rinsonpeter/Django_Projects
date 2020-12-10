@@ -53,7 +53,6 @@ def orderMobile(request, pk):
 
 @login_required(login_url ='signin')
 def userviewMobiles(request, pk):
-    print("inside user view Mobiles")
     qs = Mobile.objects.get(id = pk)
     context = {'mobile': qs}
     return render(request, 'users/userviewmob.html', context)

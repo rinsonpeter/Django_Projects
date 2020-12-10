@@ -1,0 +1,13 @@
+{%extends 'trainerBase.html'%}
+{% block body_block %}
+
+<div class='container'>
+
+
+<h1>  Welcome {{request.user}}  </h1>
+{% csrf_token %}
+
+</div>
+
+
+{% endblock %}

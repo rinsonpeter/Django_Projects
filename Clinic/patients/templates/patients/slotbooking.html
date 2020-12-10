@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{%extends 'patients/base.html'%}
+
+{% block body_block %}
+<div class="container">
+    <h3>Request Appointment</h3>
+    <div class="row">
+        <div class="col-4">
+            <form method="post">
+
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" value="request">
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

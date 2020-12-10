@@ -1,0 +1,28 @@
+{%extends 'trainerBase.html'%}
+{% block body_block %}
+
+<div class='container'>
+
+    <div class='row'>     
+        {% for jobs  in  qs %}
+            <div class="col-4">
+                <div class="card" style="width: 18rem;">
+                    
+                    <div class="card-body">
+                    <h5 class="card-title">Technology:{{jobs.skillset}}</h5>
+                    <p class="card-text">{{jobs.jobTitle}}</p>
+                    <p class="card-text">Experience(yrs):{{jobs.experience}}</p>
+                    <p class="card-text">Hourly Rate:{{jobs.hourlyRate}}</p>
+                    <a href="{% url 'trainerApplications' jobs.id%}" class="btn btn-primary">Apply</a>
+                    </div>
+
+                </div><br>
+            </div>
+        {% endfor %}
+    </div>
+
+
+</div>
+
+
+{% endblock %}

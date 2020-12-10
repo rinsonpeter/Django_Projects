@@ -1,0 +1,30 @@
+{%extends 'base.html'%}
+{% block body_block %}
+
+
+<h3> LIST OF ALL JOBS <h3>
+
+<div class="container">
+    <div class="row">
+
+          {% for jobs in job %}
+            <div class="col-4">
+                <div class="card" style="width: 18rem;">
+                  
+                  <div class="card-body">
+                    <h5 class="card-title">{{jobs.skillset}}</h5>
+                    <p class="card-text">{{jobs.jobTitle}}</p>
+                    <p class="card-text">{{jobs.experience}}</p>
+                    <p class="card-text">{{jobs.hourlyRate}}</p>
+                    <a href="{% url 'deleteJobs' jobs.id %}" class="btn btn-primary">delete</a>
+                  </div>
+
+                </div><br>
+            </div>
+          {% endfor %}
+
+    </div>
+</div>
+    
+
+{% endblock  %}

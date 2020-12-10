@@ -18,13 +18,13 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.shortcuts import render,redirect
-
-from patients.views import patientRegistration, patientLogin, patientHome, createPatientProfile
+from patients.views import *
 
 urlpatterns = [
     path('registration',patientRegistration,name='patientRegistration'),
-    path('login',patientLogin,name='patientlogin'),
+    path('',patientLogin,name='patientlogin'),
     path('home',patientHome,name='patienthome'),
-    path('profile',createPatientProfile,name='patientprofile')
-
+    path('profile',createPatientProfile,name='patientprofile'),
+    path('editprofile',patientEditProfile,name='editprofile'),
+    path('bookslot',BookSlot,name='bookingslot')
 ]
