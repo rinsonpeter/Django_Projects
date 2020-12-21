@@ -8,8 +8,14 @@
 </head>
 <body style="background-color: cyan">
     <div class='container'>
-                             <h1>Available books</h1>
+        <h1>Available books  </h1>
+        <div style="position: absolute;  top: 0; right: 0; width: 100px; text-align:right;">
+        <a class="btn btn-danger" href="{% url 'logout' %}">logout_{{request.user}}</a>
+        </div>
+                             
+
     <a class="btn btn-danger" href="{% url 'create' %}">create book</a> <hr>  <br>
+    
     <div class='row'>
         {% for book in books %}
             <div class='col-4'>

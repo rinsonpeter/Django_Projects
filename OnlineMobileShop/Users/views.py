@@ -75,7 +75,6 @@ def signIn(request):
             login(request, user)
             return redirect('userhome')
 
-
     return render(request, 'users/login.html')
 
 

@@ -4,7 +4,10 @@ from django.views.generic import ListView,\
     TemplateView
 from books.models import Book
 from django.urls import reverse_lazy
-from .forms import BookCreateForm
+from books.forms import BookCreateForm ,\
+     UserRegistrationForm, LoginForm
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login,logout
 
 # Create your views here.
 
@@ -71,7 +74,7 @@ class UpdateBooks(UpdateView):
     context = {}
     # fields=['book_name','price','pages','author']
     # success_url=reverse_lazy('list')
-
+ 
     def get_queryset(self, pk):
         return self.model.objects.get(id=pk)
 
@@ -86,3 +89,51 @@ class UpdateBooks(UpdateView):
         if form.is_valid():
             form.save()
             return redirect('list')
+
+class RegistrationView(TemplateView):
+    template_name="books/registration.html"
+    context={}
+
+    def get(self, request, *args, **kwargs):
+        form=UserRegistrationForm()
+        self.context['form']=form
+        return render(request,self.template_name,self.context)
+
+    def post(self,request,*args,**kwargs):
+        form=UserRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('SignIn')    
+
+class SignIn(TemplateView):
+    template_name='books/login.html'
+    context={}
+
+    def get(self,request,*args,**kwargs):
+        form=LoginForm()
+        self.context['form']= form
+        return render(request,self.template_name,self.context)
+
+    def post(self,request,*args,**kwargs):
+        form=LoginForm(request.POST)
+        if form.is_valid():
+            username=form.cleaned_data.get('username')
+            password=form.cleaned_data.get('password')
+            user=authenticate(request,username=username,password=password)
+            if (user):
+                login(request,user)
+                return redirect('list')
+            else:
+                self.context['form']=form
+                return render(request,self.template_name,self.context)
+
+class SignOut(TemplateView):
+    def get(self,request,*args,**kwargs):
+        logout(request)
+        return redirect('SignIn')            
+
+
+
+
+    
+    
