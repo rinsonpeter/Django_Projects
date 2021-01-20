@@ -30,6 +30,7 @@ class BookCreateForm(ModelForm):
         pr = cleaned_data.get('price')
         pg = cleaned_data.get('pages')
         print("inside clean")
+
         if (bk):
             msg = "This book already exists"
             self.add_error('book_name', msg)
