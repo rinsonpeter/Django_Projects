@@ -55,7 +55,7 @@ class SalesForm(ModelForm):
         widgets = {
             "bill_number": forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
             "customer_name": forms.TextInput(attrs={'class': 'form-control'}),
-            "phone": forms.NumberInput(attrs={'class': 'form-control'})
+            "phone": forms.NumberInput(attrs={'class': 'form-control'}),
         }
 
 
@@ -73,7 +73,7 @@ class OrderForm(ModelForm):
         fields = ['bill_number', 'product_name', 'quantity', 'rate', 'price']
         widgets = {
             "bill_number": forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
-            "quantity": forms.TextInput(attrs={'class': "form-control"}),
+            "quantity": forms.TextInput(attrs={'class': 'form-control','placeholder': 'Quantity'}),
             "price": forms.HiddenInput(),
             "rate": forms.HiddenInput(),
             "price": forms.HiddenInput(),

@@ -10,7 +10,7 @@
     <meta charset="UTF-8" />
     <title>Products</title>
   </head>
-  <body>
+  <body style="background-color: RGB(146, 87, 158)">
     <h2 align="center">Products</h2>
     <div class="container">
       <div class="row">
@@ -28,11 +28,12 @@
         <div class="col-3"></div>
         <div class="col-6">
           {% if products %}
-          <table class="table table-bordered">
+          <table class="table table-bordered table-hover table-dark">
             <thead class="thead-light">
               <tr>
                 <th scope="col">Product name</th>
-                <th scope="col">Action</th>
+                <th scope="col">Actions</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
 
@@ -41,6 +42,9 @@
               <td>{{ item.product_name }}</td>
               <td>
                 <a href="{% url 'editproduct' item.id %}">Edit</a>
+                
+              </td>
+              <td>
                 <a href="{% url 'deleteproduct' item.id %}">Delete</a>
               </td>
             </tr>

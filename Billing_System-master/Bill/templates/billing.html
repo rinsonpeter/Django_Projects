@@ -10,10 +10,10 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
+<body style="background-color: RGB(146, 87, 158)">
     <div class="container">
         <div class="row">
-            <div class="col-4">
+            <div class="col-4"><br>
                 <form method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
@@ -30,6 +30,7 @@
                 <th>Quantity</th>
                 <th>Rate</th>
                 <th>Price</th>
+                <th>Action</th>
               </tr>
             </thead>
 
@@ -42,11 +43,16 @@
               <td><a href="{% url 'deleteorder' item.id %}">Delete</a></td>
             </tr>  
             {% endfor %}
+
+            <h1>Cart Value: {{total.bill_total}}</h1>
+
             {% endif %}
 
             </div>
-        </div>        
+            
+        </div>   <br>    
     </div>
+    
 
 
 </body>

@@ -156,6 +156,8 @@ class Order(TemplateView):
         orders = self.model.objects.filter(bill_number=kwargs["pk"])
         self.context["form"] = form
         self.context["orders"] = orders
+        total=SalesModel.objects.get(bill_number=kwargs["pk"])
+        self.context['total']=total
         return render(request, self.template_name, self.context)
 
     def post(self, request, *args, **kwargs):
@@ -176,13 +178,14 @@ class Order(TemplateView):
             total = SalesModel.objects.get(bill_number=billnumber)
             total.bill_total += temp['price']
             total.save()
+            self.context['total']=total
 
             purchaseobj = PurchaseModel.objects.get(
                 product_name__product_name=pname)
             purchaseobj.quantity -= int(qty)
             purchaseobj.save()
 
-            return redirect('billing', pk=billnumber)
+            return redirect('billing',pk=billnumber)
         else:
             form = OrderForm(request.POST)
             orders = self.model.objects.filter(bill_number=kwargs["pk"])
