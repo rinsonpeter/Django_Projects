@@ -55,7 +55,7 @@ class SalesForm(ModelForm):
         widgets = {
             "bill_number": forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
             "customer_name": forms.TextInput(attrs={'class': 'form-control'}),
-            "phone": forms.NumberInput(attrs={'class': 'form-control'}),
+            "phone": forms.NumberInput(attrs={'class': 'form-control'})
         }
 
 
