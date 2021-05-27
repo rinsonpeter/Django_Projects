@@ -5,19 +5,19 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from Bill.models import ProductModel
-from api.serializers import ProductSerializer
+from Bill.models import ProductModel,PurchaseModel
+
+from api.serializers import ProductSerializer,PurchaseSerializer
 
 
 # Create your views here.
 # api/products
 # get,post
 
-
+#api/products/
 class Product(APIView):
     def get(self, request):
         products = ProductModel.objects.all()
-        print(products)
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
@@ -29,9 +29,7 @@ class Product(APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 # api/products/1
-
 class ProductDetail(APIView):
     def get_object(self, pk):
         return ProductModel.objects.get(id=pk)
@@ -54,3 +52,17 @@ class ProductDetail(APIView):
         product = self.get_object(pk)
         product.delete()
         return Response(status=status.HTTP_200_OK)
+
+class Purchases(APIView):
+    def get(self, request):
+        purchases = PurchaseModel.objects.all()
+        serializer = PurchaseSerializer(purchases, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = PurchaseSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

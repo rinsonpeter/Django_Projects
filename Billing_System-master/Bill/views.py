@@ -144,7 +144,7 @@ class Sales(TemplateView):
             billnumber = form.cleaned_data.get("bill_number")
             form.save()
             return redirect("billing", pk=billnumber)
-
+            
 
 class Order(TemplateView):
     model = OrderModel
@@ -164,6 +164,7 @@ class Order(TemplateView):
         temp = request.POST.copy()
         qty = temp['quantity']
         pname = temp['product_name']
+        
         s_price = PurchaseModel.objects.get(
             product_name__product_name=pname).selling_price
         price = int(s_price)*int(qty)
@@ -173,7 +174,6 @@ class Order(TemplateView):
         form = OrderForm(temp)
         if form.is_valid():
             form.save()
-
             billnumber = form.cleaned_data.get('bill_number')
             total = SalesModel.objects.get(bill_number=billnumber)
             total.bill_total += temp['price']

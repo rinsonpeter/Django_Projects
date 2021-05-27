@@ -9,7 +9,8 @@ class ProductModel(models.Model):
 
 
 class PurchaseModel(models.Model):
-    product_name = models.ForeignKey(ProductModel, on_delete=models.CASCADE)
+    product_name = models.ForeignKey(ProductModel,
+        related_name='p_name', on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
     buying_price = models.IntegerField(default=1)
     selling_price = models.IntegerField(default=10)
