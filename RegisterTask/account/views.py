@@ -15,7 +15,7 @@ from account.tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 
-from account.forms import RegistrationForm, MyPasswordResetForm, UserLoginForm
+from account.forms import MyForgotPassForm, RegistrationForm, MyPasswordResetForm, UserLoginForm
 from account.models import Account
 
 def register_view(request):
@@ -52,8 +52,7 @@ def register_view(request):
 
         else:
             print("email sent failed")
-            print("invalid else POST method")  
-            #form=RegistrationForm()
+            print("invalid else POST method")
             context['form']=form
             return render(request,'account/registration.html',context)
 
@@ -83,7 +82,10 @@ def activate(request, uidb64, token):
                 user.save()
                 login(request, user)
                 return redirect("home")
-            print("not valid")    
+            else:
+                context['form']=form    
+                return render(request,'account/reset_pass.html',context)        
+                
         return render(request,'account/reset_pass.html',context)
     return render(request,'account/reset_pass.html',context)       
 
@@ -115,10 +117,6 @@ def home(request):
     """
     template_name='account/homepage.html'
     context={}
-    # user=request.user
-    # context['user':user]
-
-
     return render(request,template_name,context)
     #return HttpResponse('HOME')  
 
@@ -159,5 +157,44 @@ def user_login(request):
 def logoutview(request):
     logout(request)
     return redirect("user_login")
+
+def forgotPasswordView(request):
+    template_name='account/forgotpass.html'
+    form=MyForgotPassForm()
+    context={}
+    context['form']=form
+    if request.method=="POST":
+        form=MyForgotPassForm(request.POST)
+        print("inside post")
+        print(form.errors)
+        if form.is_valid():
+            print("inside is valid forgot")
+            to_email = form.cleaned_data.get('email')
+            print("to email : ",to_email)
+            user=Account.objects.get(email=to_email)
+            current_site = get_current_site(request)
+            mail_subject="Reset Password"
+
+            message=render_to_string('pass_reset_email.html',{
+                'user':user,
+                'domain':current_site.domain,
+                'uid':urlsafe_base64_encode(force_bytes(user.pk)),
+                'token':account_activation_token.make_token(user),
+            })
+            email = EmailMessage(
+                        mail_subject, message, to=[to_email]
+            )
+            email.send()
+            print("forgot pass email send")
+            return HttpResponse(
+                '<h1>Please check your mail for\
+                    password reset link</h1>')
+        else:
+            print("email send failed forgot")
+            context['form']=form
+            return render(request,template_name,context)
+
+    return render(request,template_name,context)
+   
 
 

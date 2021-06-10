@@ -14,25 +14,23 @@
 </head>
 <body>
     <div class='container'>
-        <div class='jumbotron'>
-            <h1>RESET PASSWORD HERE NOW</h1>
-            
-                Hello {{user.name}} <br><br>
-                <form action="" method='post'>
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <input class="btn btn-primary" type="submit" value="LogIn">
+        <div class='row'>
+        <h1>Reset your Password </h1>
 
-                    {% comment %} {% csrf_token %}
-                    <label for="p1">Password</label>
-                    <input name='p1' type="password">
-                    
-                    <label for="p2">Confirm Password</label>
-                    <input name='p2' type="password">
-                    
-                    <input type="submit" value=LogIn> {% endcomment %}
-                    
-                </form>
+            <div class="col-4"></div>
+            <div class="col-4">
+                
+                
+                    Hello {{user.name}} <br><br>
+                    <form action="" method='post'>
+
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input class="btn btn-primary" type="submit" value="LogIn">
+
+                    </form>
+            </div>
+            <div class="col-4"></div>
             
             
             

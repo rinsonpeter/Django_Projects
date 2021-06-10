@@ -41,16 +41,16 @@ class MyPasswordResetForm(forms.Form):
 	Password = forms.CharField(widget = forms.PasswordInput(attrs = {'class': 'form-control'}))
 	Confirm_Password = forms.CharField(widget = forms.PasswordInput(attrs = {'class': 'form-control'}))
 
-	# def clean(self):
-	# 	cleaned_data=super().clean()
-	# 	pass1=self.cleaned_data.get('Password')
-	# 	pass2=self.cleaned_data.get('Confirm_Password')
+	def clean(self):
+		cleaned_data=super().clean()
+		pass1=self.cleaned_data.get('Password')
+		pass2=self.cleaned_data.get('Confirm_Password')
 
-	# 	print(pass1,pass2)
+		print(pass1,pass2)
 
-	# 	if (len(pass1)!=len(pass2)):
-	# 		msg="password does not match"
-	# 		self.add_error('Password',msg)
+		if (pass1)!=len(pass2):
+			msg="password does not match"
+			self.add_error('Password',msg)
 
 class UserLoginForm(forms.Form):
 	email=forms.CharField(widget=forms.EmailInput( attrs = {'class': 'form-control'}))
@@ -68,14 +68,28 @@ class UserLoginForm(forms.Form):
 		print("type of account:  ",type(account))
 		print("account details: ",account)
 		if not account:
-			msg="Account does not exist Please register"
+			msg="Account does not exist, Please register"
 			self.add_error('email',msg)
 		else:
 			user=authenticate(email=clean_email,password=clean_password)
 			if not user:
-				msg="Password wrong Forgot pass"
-				self.add_error('password',msg)	
+				msg="Incorrect Password"
+				self.add_error('password',msg)
 
+
+class MyForgotPassForm(forms.Form):
+	email=forms.CharField(widget=forms.EmailInput
+			( attrs = {'class': 'form-control'}))
+
+	def clean(self):
+		print("inside clean forgot form")
+		cleaned_data=super().clean()
+		cleaned_email=cleaned_data.get("email")
+		account=Account.objects.filter(email=cleaned_email).exists()
+		print("account query value: ",account)
+		if not account:
+			msg="Email not yet registered"
+			self.add_error('email',msg)
 
 
 

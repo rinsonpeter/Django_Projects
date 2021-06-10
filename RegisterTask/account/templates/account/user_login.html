@@ -20,7 +20,7 @@
             <form method='post'>
                 {% csrf_token %}
                 {{form.as_p}}
-                <a href="forgotPass">Forgot Password</a><br><br>    
+                <a href="{% url 'forgotpass' %}">Forgot Password</a><br><br>    
                 <input type="submit" value="LogIn">
             </form>
         </div>

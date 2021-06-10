@@ -20,6 +20,7 @@ from account import views
 from django.conf.urls import url
 
 urlpatterns = [
+    path('forgotpass',views.forgotPasswordView,name="forgotpass"),
     path('home/',views.home,name='home'),
     path('logoutview',views.logoutview,name='logoutview'),
     path('reset_pass/',views.reset_pass,name='reset_pass'),
@@ -27,5 +28,6 @@ urlpatterns = [
     path('reg_confirm/',views.reg_confirm,name='reg_confirm'),
     path('user_login',views.user_login,name='user_login'),
     path('activate/<slug:uidb64>/<slug:token>/', views.activate, name='activate'),
+    path('reactivate/<slug:uidb64>/<slug:token>/', views.activate, name='reactivate'),
   
 ]
