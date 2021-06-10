@@ -35,7 +35,9 @@ def patientLogin(request):
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
             user = authenticate(request, username=username, password=password)
+            print(user)
             if (user):
+                print("iside usr")
                 djangologin(request, user)
                 return redirect('patienthome')
             else:
@@ -61,7 +63,7 @@ def createPatientProfile(request):
         else:
             context['form'] = form
             return render(request, 'patients/patientprofile.html', context)
-    return render(request, 'patients/patientprofile.html', context)
+    return render(request, 'patients/patientplrofile.html', context)
 
 
 def patientEditProfile(request):

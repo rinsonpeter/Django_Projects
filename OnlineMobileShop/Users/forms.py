@@ -19,7 +19,7 @@ class OrderForm(ModelForm):
         widgets = {
             'mobile': forms.TextInput(attrs = {'class': 'form-control','readonly':'readonly'}),
             'user': forms.TextInput(attrs = {'class': 'form-control','readonly':'readonly'}),
-             'quantity': forms.NumberInput(attrs = {'class': 'form-control'}),
-             'address': forms.Textarea(attrs = {'class': 'form-control'}),
-             'status': forms.HiddenInput(),
+            'quantity': forms.NumberInput(attrs = {'class': 'form-control'}),
+            'address': forms.Textarea(attrs = {'class': 'form-control'}),
+            'status': forms.HiddenInput(),
             }

@@ -1,0 +1,27 @@
+{% extends 'account/base.html' %}
+
+{% load static %}
+
+{% block body_block %}
+
+    <div class="row">
+    <div class="col-4"></div>
+        <div class="col-4">
+            <div class="jumbotron">
+            <h1>Register Here</h1>
+
+                <form action="" method='post' enctype='multipart/form-data'>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <input class="btn btn-primary" type="submit" value="SignUp">
+                </form>
+                </div>
+        </div>
+    <div class="col-4"></div>    
+</div>
+
+{% endblock  %}
+
+
+

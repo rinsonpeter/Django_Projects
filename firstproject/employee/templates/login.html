@@ -11,7 +11,7 @@
     <h1>Employee LOG IN  Page :)</h1>
     <div class="container">
         <div class="jumbotron">
-            <form method="post" action="{%url 'emp_login' %}">
+            <form method="post" action="{% url 'emp_login' %}">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="username">username</label>
