@@ -2,15 +2,24 @@
 
 {% block body_block %}
 
-    <div class='jumbotron'>
-        <h1>HOMEPAGE</h1>
-        <h2>{{request.user.email}}</h2>
-        <h2>{{request.user.name}}</h2>
-        <h2>{{request.user.Phone}}</h2>
-        
+    <div class='container'>
+    <div class="jumbotron">
+        <h1>HomePage</h1>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+                    
+                    <h3>Email : {{request.user.email}}</h3>
+                    <h3>Name :  {{request.user.name}}</h3>
+                    <h3>Phone :  {{request.user.Phone}}</h3>
+                    <div style="border-radius: 50%">
+                        <img style="border-radius: 50%" src="{{request.user.profile_image.url}}" alt="Image Not Found">
+                    </div>
+            </div>
+            <div class="col-6"></div>
+        </div>
 
-        <img src="{{request.user.profile_image.url}}" alt="Image Not Found">
     </div>
-
+    </div>
 {% endblock  %}
 

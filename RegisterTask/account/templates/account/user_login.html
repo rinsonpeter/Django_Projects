@@ -17,11 +17,19 @@
     <div class="row">
         <div class="col-4"></div>
         <div class="col-4"><br><br>
+        <h1>Login</h1><br>
             <form method='post'>
                 {% csrf_token %}
-                {{form.as_p}}
-                <a href="{% url 'forgotpass' %}">Forgot Password</a><br><br>    
-                <input type="submit" value="LogIn">
+                {% for field in form %}
+                        <div style="color:red"> {{ field.errors }}</div>
+                        <label>{{field.label_tag}}</label>
+                        <p>{{ field }}</p>
+                    
+                {% endfor %}
+                <a href="{% url 'forgotpass' %}">Forgot Password</a> 
+                <a href=" {% url 'register' %} ">New User? Register</a>
+                <br><br>    
+                <input type="submit" class="btn btn-primary" value="LogIn">
             </form>
         </div>
         <div class="col-4"></div>

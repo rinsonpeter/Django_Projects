@@ -20,11 +20,17 @@
     <div class="row">
     <div class="col-4"></div>
     <div class="col-4"><BR></BR>
-    
+
         <form action="" method='post'>
             {% csrf_token %}
-            {{form.as_p}}
+            {% for field in form %}
+                        <div style="color:red"> {{ field.errors }}</div>
+                        <label>{{field.label_tag}}</label>
+                        <p>{{ field }}</p>
+                    
+                {% endfor %}
             <input type="submit"  class="btn btn-primary" value="Reset">
+            <a href=" {% url 'register' %} ">New User? Register</a>
         </form>
     
     </div>

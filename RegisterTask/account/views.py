@@ -1,11 +1,10 @@
 from decimal import Context
 from django.contrib.auth.forms import PasswordResetForm
 
-
-
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
@@ -42,14 +41,17 @@ def register_view(request):
                 'uid':urlsafe_base64_encode(force_bytes(user.pk)),
                 'token':account_activation_token.make_token(user),
             })
+            print("user.PK value",user.pk)
+            print(urlsafe_base64_encode(force_bytes(user.pk)))
+            print(account_activation_token.make_token(user))
+
             to_email = form.cleaned_data.get('email')
             email = EmailMessage(
                         mail_subject, message, to=[to_email]
             )
             email.send()
             print("email sent success")
-            return HttpResponse('<h1>Please confirm your email address to set the Password<h1>')
-
+            return redirect("regconfirm")
         else:
             print("email sent failed")
             print("invalid else POST method")
@@ -66,7 +68,7 @@ def activate(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
         user = Account.objects.get(pk=uid)
-    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+    except:
         user = None
 
     if user is not None and account_activation_token.check_token(user, token):
@@ -86,46 +88,24 @@ def activate(request, uidb64, token):
                 context['form']=form    
                 return render(request,'account/reset_pass.html',context)        
                 
-        return render(request,'account/reset_pass.html',context)
     return render(request,'account/reset_pass.html',context)       
 
-def reset_pass(request):
+def regconfirm(request):
     """ email verify redirects here for 
         password set up , then to login
         page
     """
-    print("inside reset password page ")
-    template_name='account/reset_pass.html'
-    form=MyPasswordResetForm()
-    context={}
-    context['form']=form
+    template_name='account/reg_confirm.html'
 
-    if request.method=='POST':
-        form=MyPasswordResetForm(request.POST)
-        if form.is_valid():
-            pswd=form.cleaned_data.get("Password")
+    return render(request,template_name)
 
-            form.save()
-            return redirect("user_login")
-        else:
-            return render(request,template_name,context)    
-            
-    return render(request,template_name,context)
-
+@login_required(login_url ='user_login')
 def home(request):
     """login with email and Password
     """
     template_name='account/homepage.html'
     context={}
     return render(request,template_name,context)
-    #return HttpResponse('HOME')  
-
-def reg_confirm(request):
-    """Thank You registering.go for email verification
-    """
-
-
-    return render(request,'account/reset_pass.html')
 
 def user_login(request):
     """login with email and Password
@@ -186,9 +166,7 @@ def forgotPasswordView(request):
             )
             email.send()
             print("forgot pass email send")
-            return HttpResponse(
-                '<h1>Please check your mail for\
-                    password reset link</h1>')
+            return redirect("forgotConfirm")
         else:
             print("email send failed forgot")
             context['form']=form
@@ -196,5 +174,10 @@ def forgotPasswordView(request):
 
     return render(request,template_name,context)
    
+def forgotConfirm(request):
+    """ forgot Password template 
+        Please check your email for password reset link
+    """
+    template_name="account/forgotConfirm.html"
 
-
+    return render(request,template_name)

@@ -15,27 +15,24 @@
 <body>
     <div class='container'>
         <div class='row'>
-        <h1>Reset your Password </h1>
-
-            <div class="col-4"></div>
-            <div class="col-4">
-                
-                
-                    Hello {{user.name}} <br><br>
+        
+            <div class="col-3"></div>
+            <div class="col-6">
+                    <h1>Set your Password </h1><br>
+                    
                     <form action="" method='post'>
-
                         {% csrf_token %}
-                        {{ form.as_p }}
+                        {% for field in form %}
+                        <div style="color:red"> {{ field.errors }}</div>
+                        <label>{{field.label_tag}}</label>
+                        <p>{{ field }}</p>
+                    
+                        {% endfor %}
                         <input class="btn btn-primary" type="submit" value="LogIn">
-
                     </form>
             </div>
-            <div class="col-4"></div>
-            
-            
-            
+            <div class="col-3"></div>  
         </div>
-    </div>
-    
+    </div>   
 </body>
 </html>

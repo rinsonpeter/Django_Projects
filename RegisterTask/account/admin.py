@@ -5,7 +5,7 @@ from account.models import Account
 # Register your models here.
 
 class AccountAdmin(UserAdmin):
-    list_display=('email','name','Phone','date_joined',
+    list_display=('pk','email','name','Phone','date_joined',
                     'is_admin','is_staff','is_active',
                     'profile_image','is_superuser',
                     'last_login','password')

@@ -9,12 +9,15 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
 from django.forms.fields import CharField, EmailField
+from re import *
+from django.core.validators import RegexValidator
 
 
 class RegistrationForm(ModelForm):
 	class Meta:
 		model=Account
 		fields=('email','name','Phone','profile_image')
+
 		widgets = {
 			'email': forms.EmailInput(attrs = {'class': 'form-control'}),
             'name': forms.TextInput(attrs = {'class': 'form-control'}),
@@ -36,6 +39,25 @@ class RegistrationForm(ModelForm):
 		if account:
 			msg="Account already exists"
 			self.add_error('email',msg)
+		print(type(Phone))
+		phone_rule='^[1-9][0-9]{9}$'
+		matcher=fullmatch(phone_rule,str(Phone))
+		if matcher is None:
+			msg="Please enter 10 digit number"
+			self.add_error('Phone',msg)
+		name_rule="^[A-Za-z]{2,25}\s?[A-Za-z]{0,25}$"
+		matcher1=fullmatch(name_rule,name)
+		if matcher1 is None:
+			msg="Please enter alphabets only"
+			self.add_error('name',msg)
+
+
+
+			
+
+
+
+
 			
 class MyPasswordResetForm(forms.Form):
 	Password = forms.CharField(widget = forms.PasswordInput(attrs = {'class': 'form-control'}))
@@ -48,7 +70,7 @@ class MyPasswordResetForm(forms.Form):
 
 		print(pass1,pass2)
 
-		if (pass1)!=len(pass2):
+		if (pass1)!=(pass2):
 			msg="password does not match"
 			self.add_error('Password',msg)
 
