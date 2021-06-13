@@ -36,8 +36,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'account',
-    
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -139,6 +137,6 @@ MEDIA_ROOT=MEDIA_DIR
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'rinson.peter1992@gmail.com'
-EMAIL_HOST_PASSWORD = pwd
+EMAIL_HOST_PASSWORD = pwd              # a variable
 EMAIL_PORT = 587
 

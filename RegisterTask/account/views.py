@@ -35,7 +35,7 @@ def register_view(request):
             user.save()
             current_site = get_current_site(request)
             mail_subject = 'Activate your account.'
-            message = render_to_string('acc_active_email.html', {
+            message = render_to_string('account/acc_active_email.html', {
                 'user': user,
                 'domain': current_site.domain,
                 'uid':urlsafe_base64_encode(force_bytes(user.pk)),
@@ -70,7 +70,10 @@ def activate(request, uidb64, token):
         user = Account.objects.get(pk=uid)
     except:
         user = None
-
+    if user.is_active:
+        context['message']="Reset Your Password"
+    else:
+        context['message']="Set Your New Password"        
     if user is not None and account_activation_token.check_token(user, token):
         print("inside val")
         if request.method=='POST':
@@ -83,7 +86,7 @@ def activate(request, uidb64, token):
                 user.is_active = True
                 user.save()
                 login(request, user)
-                return redirect("home")
+                return render(request,"account/homepage.html",context)
             else:
                 context['form']=form    
                 return render(request,'account/reset_pass.html',context)        
@@ -155,7 +158,7 @@ def forgotPasswordView(request):
             current_site = get_current_site(request)
             mail_subject="Reset Password"
 
-            message=render_to_string('pass_reset_email.html',{
+            message=render_to_string('account/pass_reset_email.html',{
                 'user':user,
                 'domain':current_site.domain,
                 'uid':urlsafe_base64_encode(force_bytes(user.pk)),

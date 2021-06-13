@@ -45,10 +45,10 @@ class RegistrationForm(ModelForm):
 		if matcher is None:
 			msg="Please enter 10 digit number"
 			self.add_error('Phone',msg)
-		name_rule="^[A-Za-z]{2,25}\s?[A-Za-z]{0,25}$"
+		name_rule="^[A-Za-z]{1,25}\s?[A-Za-z]{0,25}$"
 		matcher1=fullmatch(name_rule,name)
 		if matcher1 is None:
-			msg="Please enter alphabets only"
+			msg="Please enter alphabetic characters only"
 			self.add_error('name',msg)
 
 
