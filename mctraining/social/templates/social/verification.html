@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>verification</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link href="{%static 'css/css.css'%}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="row">
+    <div class="col"></div>
+    <div class="col-5 login">
+    <form method="post" >
+        {%csrf_token%}
+            {{form.as_p}}
+            <input class="btn btn-success" type="submit" value="Confirm">
+    </form>
+    </div>
+    <div class="col"></div>
+</div>
+</body>
+</html>

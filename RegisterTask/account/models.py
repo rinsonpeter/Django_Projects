@@ -9,7 +9,6 @@ class MyAccountManager(BaseUserManager):
 		
 		user = self.model(
 			email=self.normalize_email(email),
-			
 		)
 
 		user.set_password(password)
@@ -20,7 +19,6 @@ class MyAccountManager(BaseUserManager):
 		user = self.create_user(
 			email=self.normalize_email(email),
 			password=password,
-
 		)
 		user.is_active=True
 		user.is_admin = True

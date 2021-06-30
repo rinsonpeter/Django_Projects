@@ -1,7 +1,7 @@
-from decimal import Context
-from django.contrib.auth.forms import PasswordResetForm
+#from decimal import Context
+#from django.contrib.auth.forms import PasswordResetForm
 
-from django.http import HttpResponse
+#from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -35,7 +35,7 @@ def register_view(request):
             user.save()
             current_site = get_current_site(request)
             mail_subject = 'Activate your account.'
-            message = render_to_string('account/acc_active_email.html', {
+            message = render_to_string('account/acc_active_email.html',{
                 'user': user,
                 'domain': current_site.domain,
                 'uid':urlsafe_base64_encode(force_bytes(user.pk)),
@@ -91,7 +91,7 @@ def activate(request, uidb64, token):
                 context['form']=form    
                 return render(request,'account/reset_pass.html',context)        
                 
-    return render(request,'account/reset_pass.html',context)       
+    return render(request,template_name,context)       
 
 def regconfirm(request):
     """ email verify redirects here for 
