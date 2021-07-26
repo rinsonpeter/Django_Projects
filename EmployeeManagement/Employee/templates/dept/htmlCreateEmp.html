@@ -1,0 +1,43 @@
+{% extends 'dept/base.html' %} 
+{% block body_block %}
+
+<div class="container"><br><br><br>
+  <div class="row">
+    <div class="col-4">
+      <form method="post">
+        {% csrf_token %} {{form.as_p}}
+        <input type="submit" value="Create" class="btn btn-primary" />
+      </form>
+    </div>
+    <div class="col-8">
+    {% if emp %}
+        <table class="table table-dark">
+        <tr>
+          <h3>Employee List</h3>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Department</th>
+
+
+          <br/>
+        </tr>
+        {% for employee in emp %}
+        <tr>
+          <td>{{employee.emp_id}}</td>
+          <td>{{employee.name}}</td>
+          <td>{{employee.dept}}</td>
+          <td><a href="{%url 'viewDeleteEmp' employee.id%}" class="btn btn-danger">Delete</a> </td>
+          <td><a href="{%url 'viewUpdateEmp' employee.id%}" class="btn btn-warning">Update</a> </td>
+
+
+        </tr>
+
+        {% endfor %}
+      </table>
+    
+    {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
