@@ -1,0 +1,17 @@
+{% extends 'dept/base.html' %} {% block body_block %}
+
+<div class="container">
+    <br /><br /><br /><br />
+  <div class="row">
+    
+    <div class="col-4"></div>
+    <div class="col-4">
+      <form method="post">
+        {% csrf_token %} {{form.as_p}}
+        <input type="submit" value="Update" class="btn btn-primary" />
+      </form>
+    </div>
+    <div class="col-4"></div>
+  </div>
+</div>
+{% endblock %}
